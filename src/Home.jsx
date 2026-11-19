@@ -4,6 +4,7 @@ import { landingBody } from "./landingBody.js";
 /** Public landing — same content as the Netlify page / syllabus program. No admin link. */
 export default function Home() {
   const rootRef = useRef(null);
+  const navigateRef = useRef(null);
 
   useEffect(() => {
     const root = rootRef.current;
@@ -49,6 +50,8 @@ export default function Home() {
       }
       window.scrollTo(0, 0);
     }
+
+    navigateRef.current = navigateTo;
 
     function checkRoute() {
       const hash = window.location.hash || "";
@@ -124,6 +127,23 @@ export default function Home() {
   }, []);
 
   return (
-    <div ref={rootRef} dangerouslySetInnerHTML={{ __html: landingBody }} />
+    <>
+      <a
+        href="#/register"
+        data-path="register"
+        onClick={(e) => {
+          e.preventDefault();
+          navigateRef.current?.("register", true);
+        }}
+        className="fixed top-0 inset-x-0 z-[60] flex items-center justify-center gap-2 bg-[#b22c09] text-white text-center text-xs sm:text-sm font-semibold tracking-wide px-3 py-2.5 hover:bg-[#8a1c00] transition-colors"
+      >
+        <span className="hidden sm:inline">●</span>
+        Register For Workshop on AI Literacy and Social Media Content Creation
+        <span className="underline underline-offset-2 font-bold">
+          Register Now →
+        </span>
+      </a>
+      <div ref={rootRef} dangerouslySetInnerHTML={{ __html: landingBody }} />
+    </>
   );
 }
