@@ -59,11 +59,19 @@ export default function Home() {
       else navigateTo("home", false);
     }
 
+    function scrollToId(id) {
+      const el = root.querySelector(`#${id}`);
+      if (!el) return;
+      const top =
+        el.getBoundingClientRect().top + window.scrollY - 120; // banner + header
+      window.scrollTo({ top, behavior: "smooth" });
+    }
+
     function onClick(e) {
       const link = e.target.closest('a[data-path], a[href^="#/"]');
       if (!link || !root.contains(link)) return;
       const dataPath = link.getAttribute("data-path");
-      const href = link.getAttribute("href");
+      const href = link.getAttribute("href") || "";
       if (
         dataPath === "register" ||
         href === "#/register" ||
@@ -78,6 +86,16 @@ export default function Home() {
       ) {
         e.preventDefault();
         navigateTo("home", true);
+      } else if (
+        href.startsWith("#") &&
+        ["programme", "curriculum", "portfolio", "contact"].some(
+          (id) => href === `#${id}` || dataPath === id
+        )
+      ) {
+        e.preventDefault();
+        navigateTo("home", false);
+        const id = href.replace("#", "") || dataPath;
+        requestAnimationFrame(() => scrollToId(id));
       }
     }
 
