@@ -1,4 +1,7 @@
-.DS_Store
-index.raw.html
 node_modules/
-.env
+dist/
+.DS_Store
+.env*
+.vercel
+.netlify
+*.log
