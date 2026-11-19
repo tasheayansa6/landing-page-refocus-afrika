@@ -135,12 +135,17 @@ export default function Home() {
           e.preventDefault();
           navigateRef.current?.("register", true);
         }}
-        className="fixed top-0 inset-x-0 z-[60] flex items-center justify-center gap-2 bg-[#b22c09] text-white text-center text-xs sm:text-sm font-semibold tracking-wide px-3 py-2.5 hover:bg-[#8a1c00] transition-colors"
+        className="fixed top-0 inset-x-0 z-[60] flex items-center justify-center gap-2.5 bg-[#020026] text-white text-center text-xs sm:text-sm font-semibold tracking-wide px-3 py-2.5 hover:bg-[#0a0840] transition-colors"
       >
-        <span className="hidden sm:inline">●</span>
-        Register For Workshop on AI Literacy and Social Media Content Creation
-        <span className="underline underline-offset-2 font-bold">
-          Register Now →
+        <span
+          className="inline-block w-2 h-2 rounded-full bg-[#e53935] shrink-0"
+          aria-hidden="true"
+        />
+        <span>
+          Register For Workshop on AI Literacy and Social Media Content Creation
+        </span>
+        <span className="shrink-0" aria-hidden="true">
+          →
         </span>
       </a>
       <div ref={rootRef} dangerouslySetInnerHTML={{ __html: landingBody }} />
